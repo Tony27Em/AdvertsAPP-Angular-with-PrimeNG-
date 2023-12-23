@@ -1,0 +1,118 @@
+<div class="advert">
+    <div class="advert-title">
+        <div class="advert-title-content">
+            <h1>{{ advert.title }}</h1>
+        </div>
+        <p-divider></p-divider>
+    </div>
+        
+    <div class="advert-info">
+        <h3 class="advert-info-price">{{ advert.price | currency:'KZT':'symbol-narrow':'1.0-0' }}</h3>
+
+        <div 
+            class="advert-info-item" 
+            *ngFor="let item of advert.info"
+        >
+            <span>{{ item.name }}</span>
+            <span>{{ item.value }}</span>
+        </div>
+    </div>
+
+    <div class="card md:flex md:justify-content-center advert-gallery">
+        <p-button 
+            icon="pi pi-bookmark" 
+            [styleClass]="isFavorite ? 'p-button-rounded p-button-text p-button-raised p-button-warning' : 'p-button-rounded p-button-text p-button-raised p-button-success'"
+            (click)="addFavorites(advert)"
+            [disabled]="!isAuthorized"
+        ></p-button>
+        <p-galleria [value]="images" [numVisible]="5" [circular]="true" [showItemNavigators]="true" [showThumbnails]="false" [containerStyle]="{ 'width': '750px' }">
+            <ng-template pTemplate="item" let-item>
+                <img [src]="'../assets/advimg/' + advert.id + '/' + item" style="width: 100%; display: block;" />
+            </ng-template>
+        </p-galleria>
+    </div>
+    
+    
+    <div class="advert-author">
+        <p-divider></p-divider>        
+        
+        <p-card *ngIf="!isAuthorized" class="advert-author-hide" header="Контакты продавца">
+            <a routerLink="/form">Войдите</a>
+            <span>, чтобы увидеть номер телефона продавца</span>            
+        </p-card>  
+
+        <p-card *ngIf="isAuthorized" class="advert-author-card" header="Контакты продавца">
+            <h3
+                (click)="navigate(advert.userid)"
+                style="cursor: pointer;"
+            >
+                {{ advert.username }}
+            </h3> 
+            <p class="m-0">{{ advert.phone }}</p>
+        </p-card>  
+    </div>
+
+    <div class="advert-description">
+        <p-divider></p-divider>
+        <h3>Описание</h3>
+        <br>
+        <p [innerHTML]="advert.description"></p>
+    </div>
+
+    <div class="advert-comments">
+        <p-divider></p-divider>
+        <h3 class="advert-comments-header">Комментарии</h3>
+        <br>
+
+        <ng-container *ngIf="advert.comments.length">
+            <div *ngFor="let comment of advert.comments">
+                <p-card class="advert-comments-card">  
+                    <h3 
+                        *ngIf="!isAuthorized" 
+                        pTooltip="Для просмотра профиля необходимо авторизоваться"
+                        tooltipPosition="left"
+                    >
+                        {{ comment.author }}
+                    </h3>
+                    <ng-container *ngIf="isAuthorized">
+                        <h3
+                            (click)="navigate(comment.userid)"
+                            style="cursor: pointer;"
+                        >
+                            {{ comment.author }}
+                        </h3>                         
+                    </ng-container>
+                    <br>          
+                    <p class="m-0">{{ comment.text }}</p>
+                    <br>
+                    <p class="m-0">Дата добавления: {{ comment.date }}</p>
+                </p-card>    
+                <br>
+            </div>            
+        </ng-container>
+
+        <div *ngIf="!advert.comments.length">Комментариев пока нет</div>
+    </div>
+
+    <div class="advert-add-comment">
+        <p-divider></p-divider>
+        <h3>Оставить комментарий</h3>
+        <br>
+        <textarea 
+            [disabled]="!isAuthorized"
+            rows="10" 
+            pInputTextarea 
+            [autoResize]="true" 
+            style="width: 100%;"
+            [(ngModel)]="comment"
+        ></textarea>
+        <br><br>
+        <p-button 
+            [disabled]="!isAuthorized"
+            label="Опубликовать"
+            (click)="addComment()"
+        ></p-button>
+    </div>
+</div>
+
+<p-toast></p-toast>

@@ -1,0 +1,93 @@
+<div class="edit">
+    <div class="edit-header">
+        <h1>Редактирование профиля</h1>
+        <small class="edit-header-small">* - обязательные поля</small>
+    </div>
+
+    <div class="flex flex-column gap-2 input-block">
+        <div class="p-float-label">
+            <p-password 
+                [disabled]="isSuccess"
+                [(ngModel)]="currentPassword" 
+                [feedback]="false" 
+                [toggleMask]="true"
+                [style]="{'width': '100%'}"
+                [inputStyle]="{'width': '100%'}"
+            ></p-password>
+            <label>Текущий пароль *</label>
+        </div>
+    </div>
+
+    <div class="flex flex-column gap-2 input-block">
+        <div class="p-float-label">
+            <p-password 
+                [disabled]="isSuccess"
+                [(ngModel)]="newPassword" 
+                [feedback]="false" 
+                [toggleMask]="true"
+                [style]="{'width': '100%'}"
+                [inputStyle]="{'width': '100%'}"
+                (keyup)="checkPassword()"
+                [ngClass]="{'valid': isPasswordValid}"
+            ></p-password>
+            <label>Новый пароль *</label>
+        </div>
+        <ng-container *ngIf="showInputPasswordMessage">
+            <small [ngClass]="{'fade-in': showInputPasswordMessage}">Минимум 1: прописная и строчная буквы, спецсимвол и цифра. Длина: 8 - 20</small>
+        </ng-container>
+    </div>
+
+    <div class="flex justify-content-between">
+        <span class="p-float-label w-3">
+            <input 
+                type="number" 
+                [disabled]="isSuccess"
+                pInputText 
+                [(ngModel)]="user.age" 
+                class="w-full"
+            />
+            <label>Возраст</label>
+        </span>        
+
+        <div class="p-float-label w-4">
+            <p-inputMask 
+                [disabled]="isSuccess"
+                mask="+9 999 999 99 99" 
+                [(ngModel)]="user.phone" 
+                [style]="{'width': '100%'}"
+            ></p-inputMask>
+            <label>Номер телефона</label>
+        </div>
+
+        <p-selectButton 
+            [disabled]="isSuccess"
+            [options]="genderOptions" 
+            [(ngModel)]="user.gender" 
+            optionLabel="label" 
+            optionValue="value"
+            class="w-auto"
+        ></p-selectButton>
+    </div>
+
+    <div class="edit-btns">
+        <button 
+            pButton 
+            type="button" 
+            [disabled]="isSuccess"
+            label="Сохранить" 
+            class="p-button-raised p-button-text"
+            (click)="edit()"
+        ></button>
+
+        <button 
+            pButton 
+            type="button" 
+            [disabled]="isSuccess"
+            label="Отмена" 
+            class="p-button-raised p-button-text p-button-warning"
+            (click)="cancel()"
+        ></button>
+    </div>
+</div>
+
+<p-toast></p-toast>

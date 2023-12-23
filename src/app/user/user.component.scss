@@ -1,0 +1,27 @@
+.user {
+    width: 1440px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+    &-card {
+        width: 600px;
+        text-align: center;
+        
+        & p {
+            text-align: left;
+        }
+    }
+
+    &-adverts {
+        text-align: center;
+
+        & * {
+            text-align: left;
+        }
+
+        &-content-text {
+            text-align: justify;
+        }
+    }
+}

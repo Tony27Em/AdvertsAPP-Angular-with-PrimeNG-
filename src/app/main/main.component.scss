@@ -1,0 +1,56 @@
+.adverts {
+    width: 1440px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    
+    &-header {
+        text-align: center;
+    }
+
+    &-filter {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 25px;
+        padding: 0 20px;
+    }
+
+    &-list {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        
+        &-item {
+            display: grid;
+            grid-template-columns: 500px auto;
+            grid-template-rows: repeat(2, min-content) auto min-content;
+            gap: 10px 40px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px #00000065;
+            padding-right: 20px;
+
+            &-header {
+                margin-top: 20px;
+            }
+
+            &-img {
+                width: 500px;
+                grid-area: 1/1/5/2;
+                border-radius: 6px;
+            }
+
+            &-link {
+                align-self: self-end;
+            }
+
+            &-btns {
+                display: flex;
+                align-items: self-end;
+                gap: 25px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

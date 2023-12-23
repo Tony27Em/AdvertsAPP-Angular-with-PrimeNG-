@@ -1,0 +1,40 @@
+<div class="user">
+    <p-card class="user-card" header="Информация о пользователе">
+        <p-divider></p-divider>
+        <p class="m-4">Имя: {{ user.name }}</p>
+        <p-divider></p-divider>
+        <p class="m-4">Почтовый ящик: {{ user.email }}</p>
+        <p-divider></p-divider>
+        <p class="m-4">Номер телефона: {{ user.phone || 'не указан' }}</p>
+        <p-divider></p-divider>
+        <p class="m-4">Возраст: {{ user.age || 'не указан' }}</p>
+        <p-divider></p-divider>
+        <p class="m-4">Пол: {{ user.gender | translate }}</p>
+    </p-card>
+   
+    <p-card class="user-adverts" header="Объявления пользователя">
+        <p-card 
+            class="user-adverts-content"
+            *ngFor="let adv of adverts" 
+            [header]="adv.title" 
+            [subheader]="adv.price.toString() + '₸'" 
+            [style]="{ width: '750px' }"
+        >
+            <ng-template pTemplate="header">
+                <img 
+                    alt="Card" [src]="'../assets/advimg/' + adv.id + '/' + adv.images[0]" 
+                    [style]="{ 'border-radius': '6px' }"
+                />
+            </ng-template>
+            <p 
+                class="user-adverts-content-text"
+                [innerHTML]="adv.description | customSlice"    
+            ></p>
+            <ng-template pTemplate="footer">
+                <a [routerLink]="['/advert', adv.id]">
+                    <p-button label="Подробнее"></p-button>
+                </a>
+            </ng-template>
+        </p-card>
+    </p-card>
+</div>

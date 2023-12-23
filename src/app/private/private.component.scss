@@ -1,0 +1,32 @@
+.private {
+    width: 1440px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 600px auto;
+    grid-template-rows: 50px auto;
+    gap: 25px;
+
+    &-card {
+        width: 600px;
+        text-align: center;
+        
+        & p {
+            text-align: left;
+        }
+    }
+
+    &-adverts {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+
+        & * {
+            text-align: left;
+        }
+
+        &-content-text {
+            text-align: justify;
+        }
+    }
+}

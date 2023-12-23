@@ -1,0 +1,108 @@
+<div class="reg-form">
+    <div class="reg-form-header">
+        <h1>Регистрация</h1>
+        <small class="reg-form-header-small">* - обязательные поля</small>
+    </div>
+
+    <div class="flex flex-column gap-2 input-block">
+        <span class="p-float-label">
+            <input 
+                [disabled]="isSuccess"
+                pInputText
+                [(ngModel)]="user.name" 
+                (keyup)="checkInputs()"                
+                [ngClass]="{'valid': isNameValid}"
+                class="w-full"
+            />
+            <label>Ваше имя *</label>
+        </span>
+        <ng-container *ngIf="showInputNameMessage">
+            <small [ngClass]="{'fade-in': showInputNameMessage}">Только прописные и строчные буквы. Длина: 3 - 20</small>
+        </ng-container>
+        <ng-container *ngIf="isNameExist">
+            <small [ngClass]="{'fade-in': isNameExist}">Имя уже занято</small>
+        </ng-container>
+    </div>
+
+    <div class="flex flex-column gap-2 input-block">
+        <div class="p-float-label">
+            <input 
+                [disabled]="isSuccess"
+                pInputText
+                [(ngModel)]="user.email" 
+                (keyup)="checkInputs()"
+                [ngClass]="{'valid': isEmailValid}"
+                class="w-full"
+            />
+            <label>Почтовый ящик *</label>
+        </div>
+        <ng-container *ngIf="showInputEmailMessage">
+            <small [ngClass]="{'fade-in': showInputEmailMessage}">Пример: example@gmail.com</small>
+        </ng-container>
+        <ng-container *ngIf="isEmailExist">
+            <small [ngClass]="{'fade-in': isEmailExist}">Почтовый ящик уже зарегистрирован</small>
+        </ng-container>
+    </div>
+
+    <div class="flex flex-column gap-2 input-block">
+        <div class="p-float-label">
+            <p-password 
+                [disabled]="isSuccess"
+                [(ngModel)]="user.password" 
+                [feedback]="false" 
+                [toggleMask]="true"
+                [style]="{'width': '100%'}"
+                [inputStyle]="{'width': '100%'}"
+                (keyup)="checkInputs()"
+                [ngClass]="{'valid': isPasswordValid}"
+            ></p-password>
+            <label>Пароль *</label>
+        </div>
+        <ng-container *ngIf="showInputPasswordMessage">
+            <small [ngClass]="{'fade-in': showInputPasswordMessage}">Минимум 1: прописная и строчная буквы, спецсимвол и цифра. Длина: 8 - 20</small>
+        </ng-container>
+    </div>
+
+    <div class="flex justify-content-between">
+        <span class="p-float-label w-3">
+            <input 
+                type="number" 
+                [disabled]="isSuccess"
+                pInputText 
+                [(ngModel)]="user.age" 
+                class="w-full"
+            />
+            <label>Возраст</label>
+        </span>        
+
+        <div class="p-float-label w-4">
+            <p-inputMask 
+                [disabled]="isSuccess"
+                mask="+9 999 999 99 99" 
+                [(ngModel)]="user.phone" 
+                [style]="{'width': '100%'}"
+            ></p-inputMask>
+            <label>Номер телефона</label>
+        </div>
+
+        <p-selectButton 
+            [disabled]="isSuccess"
+            [options]="genderOptions" 
+            [(ngModel)]="user.gender" 
+            optionLabel="label" 
+            optionValue="value"
+            class="w-auto"
+        ></p-selectButton>
+    </div>
+
+    <button 
+        pButton 
+        type="button" 
+        [disabled]="isSuccess"
+        label="Зарегистрироваться" 
+        class="p-button-raised p-button-text"
+        (click)="registrate()"
+    ></button>
+</div>
+
+<p-toast></p-toast>

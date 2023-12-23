@@ -1,0 +1,82 @@
+[
+    {
+        "id": 159746,
+        "name": "Василий Пупкин",
+        "email": "pupkin@gmail.com",
+        "password": "Pupa123!",
+        "gender": "male",
+        "age": 35,
+        "phone": "+7 777 123 45 67",
+        "favorites": []
+    },
+    {
+        "id": 265486,
+        "name": "Иван Иванов",
+        "email": "vanyusha@.fakemail.com",
+        "password": "Ivan@777",
+        "gender": "male",
+        "age": 28,
+        "phone": "+7 705 987 65 43",
+        "favorites": []
+    },
+    {
+        "id": 312549,
+        "name": "Филатов Михаил",
+        "email": "filatovvv@.fakemail.com",
+        "password": "asdASD123!",
+        "gender": "male",
+        "age": 40,
+        "phone": "+7 700 655 87 63",
+        "favorites": []
+    },
+    {
+        "id": 497532,
+        "name": "Щербаков Савелий",
+        "email": "sava_scherbakov@.fakemail.com",
+        "password": "Qwerty@123",
+        "gender": "male",
+        "age": 33,
+        "phone": "+7 777 485 65 96",
+        "favorites": []
+    },
+    {
+        "id": 584533,
+        "name": "Калинина Алёна",
+        "email": "alyona@.fakemail.com",
+        "password": "aA!1zxcv",
+        "gender": "female",
+        "age": 25,
+        "phone": "+7 702 658 88 23",
+        "favorites": []
+    },
+    {
+        "id": 632697,
+        "name": "Фадеева Мария",
+        "email": "fadeeva_maria@.fakemail.com",
+        "password": "Asdfgh23!!!",
+        "gender": "female",
+        "age": 27,
+        "phone": "+7 777 987 55 55",
+        "favorites": []
+    },
+    {
+        "id": 794632,
+        "name": "Матвеева Екатерина",
+        "email": "kat_matv@.fakemail.com",
+        "password": "Qwwe@123",
+        "gender": "female",
+        "age": 30,
+        "phone": "+7 705 555 23 23",
+        "favorites": []
+    },
+    {
+        "id": 894366,
+        "name": "Овсянникова Виктория",
+        "email": "victory@.fakemail.com",
+        "password": "passWORD777!",
+        "gender": "female",
+        "age": 20,
+        "phone": "+7 708 333 56 27",
+        "favorites": []
+    }
+]

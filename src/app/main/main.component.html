@@ -1,0 +1,59 @@
+<div class="adverts">
+    <h1 class="adverts-header">Объявления</h1>
+
+    <div class="adverts-filter">
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText [(ngModel)]="searchText" placeholder="Поиск по заголовку"/>
+        </span>
+        <p-button 
+            (click)="search()"
+            label="Искать" 
+            styleClass="p-button-raised"
+        ></p-button>
+        <p-button 
+            (click)="reset()"
+            label="Сброс" 
+            styleClass="p-button-raised p-button-warning"
+        ></p-button>
+    </div>
+    
+    <div class="adverts-list">
+        <div
+            class="adverts-list-item"
+            *ngFor="let adv of advertData"
+        >
+            <img 
+                class="adverts-list-item-img"
+                [src]="'../assets/advimg/' + adv.id + '/' + adv.images[0]"
+            />
+            <h3 class="adverts-list-item-header">{{ adv.title }}</h3>
+            <p>{{ adv.price | currency:'KZT':'symbol-narrow':'1.0-0' }}</p>
+            <p [innerHTML]="adv.description | customSlice"></p>
+            <div class="adverts-list-item-btns">
+                <a 
+                    class="adverts-list-item-btns-link"
+                    [routerLink]="['/advert', adv.id]"
+                >
+                    <button 
+                        pButton 
+                        pRipple 
+                        label="Подробнее" 
+                        class="p-button-primary"
+                    ></button>
+                </a>      
+                <button 
+                    [disabled]="!isAuthorized"
+                    pButton 
+                    pRipple
+                    [label]="adv.isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'" 
+                    [ngClass]="adv.isFavorite ? 'p-button-warning' : 'p-button-success'"
+                    (click)="addFavorites(adv)"
+                ></button>
+            </div>
+        </div>
+        <h3 style="text-align: center;" *ngIf="nothingFound">По Вашему запросу ничего не найдено</h3>
+    </div>
+</div>
+
+<p-toast></p-toast>

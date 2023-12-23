@@ -1,0 +1,99 @@
+<div class="private">
+    <div class="card flex justify-content-center private-category gap-4">
+        <p-button
+            [disabled]="isQuit"
+            (click)="edit()"
+            label="Редактировать" 
+            styleClass="p-button-raised"
+        ></p-button>
+        <p-button
+            [disabled]="isQuit" 
+            (click)="quit()"
+            label="Выйти" 
+            styleClass="p-button-raised p-button-danger"
+        ></p-button>
+    </div>
+
+    <div class="card flex justify-content-center private-category gap-4">
+        <p-button
+            [disabled]="isQuit"
+            (click)="changeCategory(false)" 
+            label="Мои объявления" 
+            [styleClass]="!value ? 'p-button-raised' : 'p-button-raised p-button-text'"
+        ></p-button>
+        <p-button
+            [disabled]="isQuit" 
+            (click)="changeCategory(true)"
+            label="Сохраненные" 
+            [styleClass]="value ? 'p-button-raised' : 'p-button-raised p-button-text'"
+        ></p-button>
+    </div>
+
+    <p-card class="private-card" header="Информация о пользователе">
+        <p-divider></p-divider>
+        <p class="m-4">Имя: {{ currentUser.name }}</p>
+        <p-divider></p-divider>
+        <p class="m-4">Почтовый ящик: {{ currentUser.email }}</p>
+        <p-divider></p-divider>
+        <p class="m-4">Номер телефона: {{ currentUser.phone || 'не указан' }}</p>
+        <p-divider></p-divider>
+        <p class="m-4">Возраст: {{ currentUser.age || 'не указан' }}</p>
+        <p-divider></p-divider>
+        <p class="m-4">Пол: {{ currentUser.gender | translate }}</p>
+    </p-card>
+           
+    <p-card *ngIf="!value" class="private-adverts" [header]="adverts.length ? 'Мои объявления' : 'Здесь пока ничего нет'">
+        <div class="card flex flex-column align-items-center gap-4">
+            <p-card 
+                class="private-adverts-content"
+                *ngFor="let adv of adverts" 
+                [header]="adv.title" 
+                [subheader]="adv.price.toString() + '₸'" 
+                [style]="{ width: '750px' }"
+            >
+                <ng-template pTemplate="header">
+                    <img 
+                        alt="Card" [src]="'../assets/advimg/' + adv.id + '/' + adv.images[0]" 
+                        [style]="{ 'border-radius': '6px' }"
+                    />
+                </ng-template>
+                <p class="private-adverts-content-text">{{ adv.description | slice:0:350 }}...</p>
+                <ng-template pTemplate="footer">
+                    <a [routerLink]="['/advert', adv.id]">
+                        <p-button label="Подробнее"></p-button>
+                    </a>
+                </ng-template>
+            </p-card>
+        </div>
+    </p-card>
+
+    <p-card *ngIf="value" class="private-adverts" [header]="adverts.length ? 'Сохраненные объявления' : 'Здесь пока ничего нет'">
+        <div class="card flex flex-column align-items-center gap-4">
+            <p-card 
+                class="private-adverts-content"
+                *ngFor="let adv of currentUser.favorites" 
+                [header]="adv.title" 
+                [subheader]="adv.price.toString() + '₸'" 
+                [style]="{ width: '750px' }"
+            >
+                <ng-template pTemplate="header">
+                    <img 
+                        alt="Card" [src]="'../assets/advimg/' + adv.id + '/' + adv.images[0]" 
+                        [style]="{ 'border-radius': '6px' }"
+                    />
+                </ng-template>
+                <p 
+                    class="private-adverts-content-text"
+                    [innerHTML]="adv.description | customSlice"
+                ></p>
+                <ng-template pTemplate="footer">
+                    <a [routerLink]="['/advert', adv.id]">
+                        <p-button label="Подробнее"></p-button>
+                    </a>
+                </ng-template>
+            </p-card>
+        </div>
+    </p-card>
+</div>
+
+<p-toast></p-toast>

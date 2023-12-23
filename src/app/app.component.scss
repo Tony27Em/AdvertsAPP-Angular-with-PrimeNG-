@@ -1,0 +1,40 @@
+.container {
+    width: 1440px;
+    height: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-rows: min-content auto min-content min-content;
+}
+
+.nav {
+    padding: 20px 0;
+
+    &-links {
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: auto repeat(2, 200px);
+
+        &-logo {
+            display: flex;
+            align-items: center;
+            font-size: 2em;
+            font-weight: 700;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-decoration: none;
+            color: #000000;
+            justify-self: start;
+        }
+
+        &-forms {
+            justify-self: end;
+        }
+    }
+}
+
+.footer {
+    padding: 0 50px 20px;    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-self: flex-end;    
+}

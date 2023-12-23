@@ -1,0 +1,27 @@
+<div class="container">
+  <nav class="nav">
+    <div class="nav-links">
+      <a class="nav-links-logo" routerLink="/">koleso.kz</a>
+      
+      <a class="nav-links-forms" [routerLink]="['/form/registration']">
+        <p-button label="Регистрация" styleClass="p-button-raised"></p-button>
+      </a>
+      
+      <a class="nav-links-forms" [routerLink]="isAuthorized ? '/private' : '/form'">
+        <p-button label="Личный кабинет" styleClass="p-button-raised p-button-text"></p-button>
+      </a>
+    </div>
+    <p-divider></p-divider>
+  </nav>  
+
+  <main class="main">
+    <router-outlet></router-outlet>
+  </main>
+  
+  <p-divider></p-divider>
+
+  <footer class="footer">
+    <p>All rights reserved &copy;</p>
+    <p>Angular Project 2023</p>
+  </footer>
+</div>

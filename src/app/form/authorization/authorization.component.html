@@ -1,0 +1,48 @@
+<div class="log-form">
+    <div class="log-form-header">
+        <h1>Авторизация</h1>
+        <small class="log-form-header-small">* - обязательные поля</small>
+    </div>
+
+    <div class="flex flex-column gap-2 input-block">
+        <span class="p-float-label">
+            <input 
+                [disabled]="isSuccess"
+                pInputText
+                [(ngModel)]="username" 
+                class="w-full"
+                (keyup)="retry()"
+            />
+            <label>Ваше имя или почтовый ящик *</label>
+        </span>           
+    </div>
+
+    <div class="flex flex-column gap-2 input-block">
+        <div class="p-float-label">
+            <p-password
+                [disabled]="isSuccess" 
+                [(ngModel)]="password" 
+                [feedback]="false" 
+                [toggleMask]="true"
+                [style]="{'width': '100%'}"
+                [inputStyle]="{'width': '100%'}"
+                (keyup)="retry()"
+            ></p-password>
+            <label>Пароль *</label>
+        </div>     
+        <ng-container *ngIf="isFailure">
+            <small [ngClass]="{'fade-in': isFailure}">Неверные имя (почтовый ящик) или пароль</small>
+        </ng-container>    
+    </div>
+   
+    <button 
+        [disabled]="isSuccess" 
+        pButton 
+        type="button" 
+        label="Войти" 
+        class="p-button-raised p-button-text"
+        (click)="authorization()"
+    ></button>
+</div>
+
+<p-toast></p-toast>
